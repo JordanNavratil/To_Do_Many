@@ -1,51 +1,23 @@
 <?php
-
-    // makes libraries available to the application
-
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Task.php";
     require_once __DIR__."/../src/Category.php";
 
-    // starts the $_SESSION superglobal variable, which is an array of arrays
-    // REMOVED FOR SQL.
-
-    // checks to see if the SESSION variable is empty at the specified key.
-    // if it is empty, creates an array at that key
-
-    // creates a new Silex\Application object
-
     $app = new Silex\Application();
     $app["debug"] = true;
-
-    //mysql stuff:
 
     $server = 'mysql:host=localhost;dbname=to_do';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
-    // makes the twig library available to the application and tells twig to look for our template
-    // in the views folder
-
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
 
-    // calls the get method on the $app object and receives a URL path as its first argument,
-    // and a function that gives our route access to the app variable, then returns
-    // the app object (using twig) to call the render method (which receives a file path that
-    // contains the twig template and an array that contains the task list)
-
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
-    });
-
-    $app->get("/tasks", function() use ($app) {
-        return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll()));
-    });
-
-    $app->get("/categories", function() use ($app) {
-        return $app['twig']->render('categories.html.twig', array('categories' =>  Category::getAll()));
+        return $app['twig']->render('index.html.twig',
+            array('categories' => Category::getAll()));
     });
 
     $app->post("/tasks", function() use ($app) {
@@ -54,13 +26,16 @@
         $task = new Task($description, $id = null, $category_id);
         $task->save();
         $category = Category::find($category_id);
-        $found_tasks = Task::find($category_id);
-        return $app["twig"]->render("category.html.twig", array("category" => $category, "tasks" => $found_tasks));
+        return $app["twig"]->render("category.html.twig",
+            array("category" => $category, "tasks" =>
+            $category->getTasks()));
     });
 
     $app->get("/categories/{id}", function($id) use ($app) {
         $category = Category::find($id);
-        return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
+        return $app['twig']->render('category.html.twig',
+            array('category' => $category, 'tasks' =>
+            $category->getTasks()));
     });
 
     $app->post("/delete_tasks", function() use ($app) {
@@ -71,7 +46,8 @@
     $app->post("/categories", function() use ($app) {
         $category = new Category($_POST["name"]);
         $category->save();
-        return $app["twig"]->render("index.html.twig", array("categories" => Category::getAll()));
+        return $app["twig"]->render("index.html.twig",
+            array("categories" => Category::getAll()));
     });
 
     $app->post("/delete_categories", function() use ($app) {
