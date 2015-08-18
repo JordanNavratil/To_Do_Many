@@ -37,7 +37,7 @@
     // contains the twig template and an array that contains the task list)
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig');
+        return $app['twig']->render('index.html.twig'), array('categories' => Category::getAll()));
     });
 
     $app->get("/tasks", function() use ($app) {
@@ -63,11 +63,10 @@
         return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll()));
     });
 
-    // calls the post method on the $app object and receives a URL path as its first argument,
-    // and a function that gives our route access to the app variable. the method then calls
-    // the Task class method deleteAll(), which resets the $_SESSION array to a blank array.
-    // then the method returns the app object (using twig) and calls the render method (which
-    // receives a file path that contains the twig template)
+    $app->get("/categories/{id}", function($id) use ($app) {
+        $category = Category::find($id);
+        return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
+    });
 
     $app->post("/delete_tasks", function() use ($app) {
         Task::deleteAll();
@@ -77,7 +76,7 @@
     $app->post("/categories", function() use ($app) {
         $category = new Category($_POST["name"]);
         $category->save();
-        return $app["twig"]->render("categories.html.twig", array("categories" => Category::getAll()));
+        return $app["twig"]->render("index.html.twig", array("categories" => Category::getAll()));
     });
 
     $app->post("/delete_categories", function() use ($app) {
