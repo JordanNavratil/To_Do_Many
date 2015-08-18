@@ -15,6 +15,7 @@
     // creates a new Silex\Application object
 
     $app = new Silex\Application();
+    $app["debug"] = true;
 
     //mysql stuff:
 
