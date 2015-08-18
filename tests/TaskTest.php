@@ -64,7 +64,7 @@
             $test_task->save();
 
             $result = Task::getAll();
-            $this->assertEquals($test_task, $result[0]);
+            $this->assertEquals($test_task, $result);
         }
         function test_getAll() {
             $name = "Home stuff";
@@ -124,7 +124,7 @@
 
             $result = Task::find($test_task->getId());
 
-            $this->assertEquals($test_Task, $result);
+            $this->assertEquals($test_task, $result);
 
         }
     }
