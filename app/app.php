@@ -11,6 +11,8 @@
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
+    date_default_timezone_set("UTC");
+
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
@@ -23,7 +25,8 @@
     $app->post("/tasks", function() use ($app) {
         $description = $_POST["description"];
         $category_id = $_POST["category_id"];
-        $task = new Task($description, $id = null, $category_id);
+        $due_date = date($_POST["due_date"]);
+        $task = new Task($description, $id = null, $category_id, $due_date);
         $task->save();
         $category = Category::find($category_id);
         return $app["twig"]->render("category.html.twig",

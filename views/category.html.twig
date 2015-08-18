@@ -20,6 +20,9 @@
                     <ul>
                         {% for task in tasks %}
                             <li>{{ task.getDescription }}</li>
+                            <ul>
+                                <li>due: {{ task.getDueDate }}</li>
+                            </ul>
                         {% endfor %}
                     </ul>
                 {% endif %}
@@ -29,7 +32,12 @@
                 <form action="/tasks" method="post">
                     <input id="category_id" name="category_id" type="hidden" value="{{ category.getId() }}">
                     <label for="description">Task Description</label>
-                    <input id="description" name="description" type="text">
+                    <input id="description" name="description" type="text"
+                        placeholder="Thing to do">
+                    <br>
+                    <label for="due_date">Due Date</label>
+                    <input id="due_date" name="due_date" type="date">
+                    <br>
 
                     <button type="submit" class="btn-danger">Add task</button>
                 </form>

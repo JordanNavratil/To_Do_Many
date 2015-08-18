@@ -16,6 +16,7 @@
     {
         protected function tearDown() {
             Category::deleteAll();
+            Task::deleteAll();
         }
         function testGetTasks()
         {
@@ -25,13 +26,14 @@
             $test_category->save();
 
             $test_category_id = $test_category->getId();
+            $due_date = '0000-00-00';
 
             $description = "Email client";
-            $test_task = new Task($description, $id, $test_category_id);
+            $test_task = new Task($description, $id, $test_category_id, $due_date);
             $test_task->save();
 
             $description2 = "Meet with boss";
-            $test_task2 = new Task($description2, $id, $test_category_id);
+            $test_task2 = new Task($description2, $id, $test_category_id, $due_date);
             $test_task2->save();
 
             $result = $test_category->getTasks();
