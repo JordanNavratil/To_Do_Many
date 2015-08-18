@@ -37,7 +37,7 @@
     // contains the twig template and an array that contains the task list)
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig'), array('categories' => Category::getAll()));
+        return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
     });
 
     $app->get("/tasks", function() use ($app) {
@@ -48,19 +48,14 @@
         return $app['twig']->render('categories.html.twig', array('categories' =>  Category::getAll()));
     });
 
-    // calls the post method on the $app object and receives a URL path as its first argument,
-    // and a function that gives our route access to the app variable. the method then
-    // creates a new task object based on the data it receives from the form, and then
-    // saves (or pushes) the new object onto the $_SESSION array. then the method returns
-    // the app object (using twig) to call the render method (which receives a file path that
-    // contains the twig template and an array that contains the new task object, which is
-    // added to the list)
-
     $app->post("/tasks", function() use ($app) {
-        $task = new Task($_POST['description']);
+        $description = $_POST["description"];
+        $category_id = $_POST["category_id"];
+        $task = new Task($description, $id = null, $category_id);
         $task->save();
-        // return $app['twig']->render('create_task.html.twig', array('newtask' => $task));
-        return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll()));
+        $category = Category::find($category_id);
+        $found_tasks = Task::find($category_id);
+        return $app["twig"]->render("category.html.twig", array("category" => $category, "tasks" => $found_tasks));
     });
 
     $app->get("/categories/{id}", function($id) use ($app) {
