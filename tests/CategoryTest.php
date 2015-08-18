@@ -41,40 +41,40 @@
         function test_getName()
         {
             $name = "Work stuff";
-            $test_Category = new Category($name);
+            $test_category = new Category($name);
 
-            $result = $test_Category->getName();
+            $result = $test_category->getName();
 
             $this->assertEquals($name, $result);
         }
         function test_save() {
             $name = "Work stuff";
-            $test_Category = new Category($name);
-            $test_Category->save();
+            $test_category = new Category($name);
+            $test_category->save();
 
             $result = Category::getAll();
 
-            $this->assertEquals($test_Category, $result[0]);
+            $this->assertEquals($test_category, $result[0]);
         }
         function test_getAll() {
             $name = "Work stuff";
             $name2 = "Home stuff";
-            $test_Category = new Category($name);
-            $test_Category->save();
-            $test_Category2 = new Category($name2);
-            $test_Category2->save();
+            $test_category = new Category($name);
+            $test_category->save();
+            $test_category2 = new Category($name2);
+            $test_category2->save();
 
             $result = Category::getAll();
 
-            $this->assertEquals([$test_Category, $test_Category2], $result);
+            $this->assertEquals([$test_category, $test_category2], $result);
         }
         function test_deleteAll() {
             $name = "Wash the dog";
             $name2 = "Home stuff";
-            $test_Category = new Category($name);
-            $test_Category->save();
-            $test_Category2 = new Category($name2);
-            $test_Category2->save();
+            $test_category = new Category($name);
+            $test_category->save();
+            $test_category2 = new Category($name2);
+            $test_category2->save();
 
             Category::deleteAll();
             $result = Category::getAll();
@@ -84,14 +84,14 @@
         function test_find() {
             $name = "Wash the dog";
             $name2 = "Home stuff";
-            $test_Category = new Category($name);
-            $test_Category->save();
-            $test_Category2 = new Category($name2);
-            $test_Category2->save();
+            $test_category = new Category($name);
+            $test_category->save();
+            $test_category2 = new Category($name2);
+            $test_category2->save();
 
-            $result = Category::find($test_Category->getId());
+            $result = Category::find($test_category->getId());
 
-            $this->assertEquals($test_Category, $result);
+            $this->assertEquals($test_category, $result);
         }
     }
  ?>

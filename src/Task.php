@@ -7,7 +7,7 @@
         function __construct($description, $id = null, $category_id) {
             $this->description = $description;
             $this->id = $id;
-            $this->cateogory_id = $category_id;
+            $this->category_id = $category_id;
         }
 
         function setDescription($new_description) {
@@ -18,15 +18,26 @@
             return $this->description;
         }
 
+        function getId()
+        {
+            return $this->id;
+        }
+
         function getCategoryId() {
             return $this->category_id;
         }
 
-        function save()
-        {
-            $statement = $GLOBALS['DB']->exec("INSERT INTO tasks (description, category_id) VALUES ('{$this->getDescription()}', {$this->getCategoryId()})");
+        function save() {
+            $statement = $GLOBALS['DB']->exec("INSERT INTO tasks (description, category_id) VALUES ('{$this->getDescription()}', {$this->getCategoryId()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
+
+
+        //
+        // $GLOBALS['DB']->exec("INSERT INTO categories (name) VALUES ('{$this->getName()}');");
+        // $result_id = $GLOBALS['DB']->lastInsertId();
+        // $this->setId($result_id);
+        //
 
         static function getAll()
         {
@@ -45,10 +56,6 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM tasks;");
-        }
-        function getId()
-        {
-            return $this->id;
         }
 
         static function find($search_id) {

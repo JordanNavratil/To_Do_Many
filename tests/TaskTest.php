@@ -17,6 +17,7 @@
 
         protected function tearDown() {
             Task::deleteAll();
+            Category::deleteAll();
         }
 
         function test_getId() {
@@ -64,7 +65,7 @@
             $test_task->save();
 
             $result = Task::getAll();
-            $this->assertEquals($test_task, $result);
+            $this->assertEquals($test_task, $result[0]);
         }
         function test_getAll() {
             $name = "Home stuff";
