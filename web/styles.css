@@ -3,3 +3,7 @@ hr {
     background-color: #f00;
     height: 5px;
 }
+
+form {
+    display: inline;
+}

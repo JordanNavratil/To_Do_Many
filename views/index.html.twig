@@ -23,6 +23,7 @@
 
                     <button type="submit" class="btn-danger">Add category</button>
                 </form>
+                <br><br>
 
                 {% if categories is not empty %}
                     <p>Here are all your categories:</p>
@@ -34,6 +35,20 @@
                 {% else %}
                     <p> There are no categories yet!</p>
                 {% endif %}
+                <br>
+                <hr>
+
+                <center>
+                    <form action="/" method="get">
+                        <button type="submit" class="btn-danger">Home!</button>
+                    </form>
+                    <form action="/deleted_tasks" method="post">
+                        <button type="submit" class="btn-danger">Delete tasks!</button>
+                    </form>
+                    <form action="/deleted_categories" method="post">
+                        <button type="submit" class="btn-danger">Delete categories!</button>
+                    </form>
+                </center>
 
             </div>
             <div class="col-sm-3"></div>

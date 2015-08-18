@@ -38,9 +38,10 @@
             $category->getTasks()));
     });
 
-    $app->post("/delete_tasks", function() use ($app) {
+    $app->post("/deleted_tasks", function() use ($app) {
         Task::deleteAll();
-        return $app['twig']->render('index.html.twig');
+        return $app['twig']->render('index.html.twig',
+            array('categories' => Category::getAll()));
     });
 
     $app->post("/categories", function() use ($app) {
@@ -50,9 +51,10 @@
             array("categories" => Category::getAll()));
     });
 
-    $app->post("/delete_categories", function() use ($app) {
+    $app->post("/deleted_categories", function() use ($app) {
         Category::deleteAll();
-        return $app["twig"]->render("index.html.twig");
+        return $app['twig']->render('index.html.twig',
+            array('categories' => Category::getAll()));
     });
 
     return $app;

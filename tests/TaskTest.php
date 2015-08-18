@@ -126,7 +126,23 @@
             $result = Task::find($test_task->getId());
 
             $this->assertEquals($test_task, $result);
+        }
 
+        function test_getDueDate() {
+            $name = "Home stuff";
+            $id = null;
+            $due_date = "1984-02-32";
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $description = "Wash the dog";
+            $category_id = $test_category->getId();
+            $test_task = new Task($description, $id, $category_id, $due_date);
+            $test_task->save();
+
+            $result = $test_task->getDueDate();
+
+            $this->assertEquals("1984-02-32", $result);
         }
     }
 
