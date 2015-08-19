@@ -37,7 +37,7 @@
         }
 
         function save() {
-            $GLOBALS['DB']->exec("INSERT INTO tasks (description, category_id, due_date) VALUES ('{$this->getDescription()}', {$this->getCategoryId()}, {$this->getDueDate()});");
+            $GLOBALS['DB']->exec("INSERT INTO tasks (description, category_id, due_date) VALUES ('{$this->getDescription()}', {$this->getCategoryId()}, '{$this->getDueDate()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
