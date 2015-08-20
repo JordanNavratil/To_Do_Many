@@ -2,14 +2,15 @@
 
 ##### _A simple database program showing things you need to do, 8-17-15_
 
-#### By _**Dillon Lloyd Lee & Ben Spanard**_
+#### By _**Dillon Lloyd Lee & Jenna Navratil**_
 
 ## Description
 
-_Something something with the database sql stuff._
+_This is our former "things to do" style program, but now there are two databases, categories and tasks, that are interlinked.  Databases are SQL databases.  Some of the former code was partially built by Ben Spanard, but most has been wholly changed and rebuilt._
 
 ## Setup
 
+* _Initialize databases first, I think._
 * _Clone directory from "https://github.com/DillonLloydLee/Inventory_Database.git"_
 * _run "composer install" into the terminal from the main folder directory._
 * _run "php -S localhost:8000" from the web folder._
@@ -22,7 +23,7 @@ _Made using SQL, PHP, HTML, Silex, Composer, Twig; tests conducted with PHPUnit.
 ### Legal
 
 
-Copyright (c) 2015 **_Dillon Lloyd Lee & Ben Spanard_**
+Copyright (c) 2015 **_Dillon Lloyd Lee & Jenna Navratil_**
 
 This software is licensed under the MIT license.
 
