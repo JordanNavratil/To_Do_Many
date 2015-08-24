@@ -14,43 +14,14 @@
 
                 <h1><center>Welcome to To Do List!</center></h1>
                 <hr>
-                <h3><a href="/categories">Add or view a category</a></h3>
-                <h3><a href="/tasks">Add or view a task</a></h3>
+                <h3><form action="/categories" method="get">
+                        <button type="submit" class="btn-lg btn-danger">Add or view a category</button>
+                    </form>
+                <h3><form action="/tasks" method="get">
+                        <button type = "submit" class="btn-lg btn-danger">Add or view a task</button>
+                    </form></h3>
 
-                <p>Create a new category:</p>
-
-                <form action="/categories" method="post">
-                    <label for="name">Category name:</label>
-                    <input id="name" name="name" type="text">
-
-                    <button type="submit" class="btn-danger">Add category</button>
-                </form>
-                <br><br>
-
-                {% if categories is not empty %}
-                    <p>Here are all your categories:</p>
-                    <ul>
-                        {% for category in categories %}
-                            <li><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p> There are no categories yet!</p>
-                {% endif %}
-                <br>
                 <hr>
-
-                <center>
-                    <form action="/" method="get">
-                        <button type="submit" class="btn-danger">Home!</button>
-                    </form>
-                    <form action="/deleted_tasks" method="post">
-                        <button type="submit" class="btn-danger">Delete tasks!</button>
-                    </form>
-                    <form action="/deleted_categories" method="post">
-                        <button type="submit" class="btn-danger">Delete categories!</button>
-                    </form>
-                </center>
 
             </div>
             <div class="col-sm-3"></div>

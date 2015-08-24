@@ -45,21 +45,21 @@
     });
 
     $app->get("/tasks/{id}", function($id) use ($app) {
-    $task = Task::find($id);
-    return $app['twig']->render('tasks.html.twig', array('task' => $task, 'categories' => $task->getCategories(), 'all_categories' => Category::getAll()));
+        $task = Task::find($id);
+        return $app['twig']->render('tasks.html.twig', array('task' => $task, 'categories' => $task->getCategories(), 'all_categories' => Category::getAll()));
     });
 
     $app->post("/add_tasks", function() use ($app) {
-    $category = Category::find($_POST['category_id']);
-    $task = Task::find($_POST['task_id']);
-    $category->addTask($task);
-    return $app['twig']->render('category.html.twig', array('category' => $category, 'categories' => Category::getAll(), 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
+        $category = Category::find($_POST['category_id']);
+        $task = Task::find($_POST['task_id']);
+        $category->addTask($task);
+        return $app['twig']->render('category.html.twig', array('category' => $category, 'categories' => Category::getAll(), 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
     });
 
 
     $app->get("/categories/{id}", function($id) use ($app) {
-    $category = Category::find($id);
-    return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
+        $category = Category::find($id);
+        return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
 });
 
     $app->post("/add_categories", function() use ($app) {
@@ -82,7 +82,7 @@
             array("categories" => Category::getAll()));
     });
 
-    $app->post("/deleted_categories", function() use ($app) {
+    $app->post("/delete_categories", function() use ($app) {
         Category::deleteAll();
         return $app['twig']->render('index.html.twig',
             array('categories' => Category::getAll()));
