@@ -20,31 +20,27 @@
                     <ul>
                         {% for task in tasks %}
                             <li>{{ task.getDescription }}</li>
-                            <ul>
-                                <li>due: {{ task.getDueDate }}</li>
-                            </ul>
                         {% endfor %}
                     </ul>
                 {% endif %}
 
                 <h4>Add a task:</h4>
 
-                <form action="/tasks" method="post">
-                    <input id="category_id" name="category_id" type="hidden" value="{{ category.getId() }}">
-                    <label for="description">Task Description</label>
-                    <input id="description" name="description" type="text"
-                        placeholder="Thing to do">
-                    <br>
-                    <label for="due_date">Due Date</label>
-                    <input id="due_date" name="due_date" type="date">
-                    <br>
-
-                    <button type="submit" class="btn-danger">Add task</button>
+                <form action='/add_tasks' method='post'>
+                    <input id="category_id" name="category_id" type="hidden" value="{{ category.getId }}">
+                    <label for="task_id">Select a task</label>
+                    <select id='task_id' name='task_id' type='text'>
+                      {% for task in all_tasks %}
+                        <option value="{{ task.getId }}"> {{ task.getDescription }} </option>
+                      {% endfor %}
+                    </select>
+                    <button type='submit'>Add task</button>
                 </form>
-                <br>
-                <hr>
 
-                <center>
+                <p><a href="/categories/{{ category.getId }}/edit">Edit this category</a></p>
+
+                <p><a href='/'>Home</a></p>
+                <!-- <center>
                     <form action="/" method="get">
                         <button type="submit" class="btn-danger">Home!</button>
                     </form>
@@ -54,7 +50,7 @@
                     <form action="/deleted_categories" method="post">
                         <button type="submit" class="btn-danger">Delete categories!</button>
                     </form>
-                </center>
+                </center> -->
 
             </div>
             <div = class="col-sm-3"></div>
