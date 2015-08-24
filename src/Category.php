@@ -28,7 +28,7 @@
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO categories (name) VALUES ('{$this->getName()}');");
-            $result_id = $GLOBALS['DB']->lastInsertId();
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         function addTask($task)
@@ -39,10 +39,10 @@
         function getTasks()
         {
             $query = $GLOBALS['DB']->query("SELECT task_id FROM categories_tasks WHERE category_id = {$this->getId()};");
-            $tasks_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+            $task_ids = $query->fetchAll(PDO::FETCH_ASSOC);
 
             $tasks = array();
-            foreach($task_ids as $id){
+            foreach($task_ids as $id) {
                 $task_id = $id['task_id'];
                 $result = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE id = {$task_id};");
                 $returned_task = $result->fetchAll(PDO::FETCH_ASSOC);
