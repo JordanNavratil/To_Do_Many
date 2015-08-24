@@ -100,7 +100,7 @@
             $description = "Wash the dog";
             $id = 1;
             $test_task = new Task($description);
-            $test_category->save();
+            $test_task->save();
 
             $description2 = "Water the lawn";
             $id2 = 2;
@@ -185,6 +185,7 @@
           $description2 = "Water the lawn";
           $id2 = 2;
           $test_task2 = new Task($description2, $id2);
+          $test_task2->save();
 
           //Act
           $test_task->delete();
